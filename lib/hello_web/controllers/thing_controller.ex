@@ -6,6 +6,13 @@ defmodule HelloWeb.ThingController do
 
   action_fallback HelloWeb.FallbackController
 
+  plug :add_latency
+
+  def add_latency(conn, _opts) do
+    :timer.sleep(100)
+    conn
+  end
+
   def index(conn, _params) do
     things = Some.list_things()
     render(conn, :index, things: things)

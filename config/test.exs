@@ -15,12 +15,22 @@ config :hello, Hello.Repo,
 
 config :hello, sql_sandbox: true
 
-# We don't run a server during test. If one is required,
-# you can enable the server option below.
 config :hello, HelloWeb.Endpoint,
-  http: [ip: {127, 0, 0, 1}, port: 4002],
+  http: [
+    # this possibly increases the chance of encountering the errors?
+    #
+    thousand_island_options: [num_acceptors: 1],
+    #
+    # possibly this setting works-around most of errors?
+    # (apart from occasional "(Req.TransportError) socket closed" errors)
+    #
+    # http_1_options: [max_requests: 1],
+    #
+    ip: {127, 0, 0, 1},
+    port: 4002
+  ],
   secret_key_base: "i33y2k9pbKm6f4MphdUnszI2uptfB4Vp66IG584XOCwAq/Gm/0LEsZuktgSKEw5m",
-  server: false
+  server: true
 
 # Print only warnings and errors during test
 config :logger, level: :warning
