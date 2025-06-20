@@ -7,5 +7,7 @@ defmodule HelloWeb.Router do
 
   scope "/api", HelloWeb do
     pipe_through :api
+
+    resources "/things", ThingController, except: [:new, :edit]
   end
 end
