@@ -11,6 +11,10 @@ defmodule HelloWeb.Endpoint do
     same_site: "Lax"
   ]
 
+  if Application.compile_env(:hello, :sql_sandbox, false) do
+    plug Phoenix.Ecto.SQL.Sandbox
+  end
+
   # socket "/live", Phoenix.LiveView.Socket,
   #   websocket: [connect_info: [session: @session_options]],
   #   longpoll: [connect_info: [session: @session_options]]
